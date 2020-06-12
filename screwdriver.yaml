@@ -1,0 +1,15 @@
+---
+shared:
+  image: centos
+
+jobs:
+  main:
+    requires: [~commit]
+    steps:
+      - export: export GREETING="Hello, world!"
+      - hello: echo $GREETING
+      - set-metadata: meta set example.coverage 99.95
+  second_job:
+    requires: main
+    steps:
+      - echo_hello: echo "SECOND JOB"
